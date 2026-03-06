@@ -1,10 +1,12 @@
-<!DOCTYPE html>
+<!DOCTYPE html><html lang="zh-TW">
 
-<html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>大阪黃金週 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
     --ink: #1a1209;
@@ -15,498 +17,438 @@
     --cream: #ede8da;
     --dark-paper: #2a2218;
   }
-
-- { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-background-color: var(–paper);
-color: var(–ink);
-font-family: ‘Georgia’, ‘Times New Roman’, serif;
-font-weight: 300;
-min-height: 100vh;
-overflow-x: hidden;
-}
-
-/* Grain overlay */
-body::before {
-content: ‘’;
-position: fixed;
-inset: 0;
-background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘noise’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23noise)’ opacity=‘0.04’/%3E%3C/svg%3E”);
-pointer-events: none;
-z-index: 1000;
-opacity: 0.4;
-}
-
-/* HERO */
-.hero {
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: flex-start;
-padding: 8vw 10vw;
-position: relative;
-overflow: hidden;
-background: var(–dark-paper);
-}
-
-.hero::after {
-content: ‘大阪’;
-position: absolute;
-right: -2vw;
-top: 50%;
-transform: translateY(-50%);
-font-size: clamp(200px, 30vw, 420px);
-font-weight: 900;
-color: rgba(255,255,255,0.03);
-letter-spacing: -0.05em;
-line-height: 1;
-pointer-events: none;
-}
-
-.hero-badge {
-font-family: ‘Georgia’, serif;
-font-style: italic;
-font-size: clamp(12px, 1.2vw, 16px);
-color: var(–gold);
-letter-spacing: 0.3em;
-text-transform: uppercase;
-margin-bottom: 2rem;
-opacity: 0;
-animation: fadeUp 0.8s 0.2s forwards;
-}
-
-.hero-title {
-font-size: clamp(48px, 8vw, 120px);
-font-weight: 900;
-color: var(–paper);
-line-height: 0.95;
-letter-spacing: -0.03em;
-margin-bottom: 1.5rem;
-opacity: 0;
-animation: fadeUp 0.8s 0.4s forwards;
-}
-
-.hero-title span {
-color: var(–vermillion);
-}
-
-.hero-sub {
-font-size: clamp(14px, 1.4vw, 18px);
-color: var(–mist);
-font-weight: 300;
-letter-spacing: 0.1em;
-opacity: 0;
-animation: fadeUp 0.8s 0.6s forwards;
-max-width: 420px;
-line-height: 1.8;
-}
-
-.hero-flights {
-margin-top: 3rem;
-display: flex;
-gap: 2rem;
-flex-wrap: wrap;
-opacity: 0;
-animation: fadeUp 0.8s 0.8s forwards;
-}
-
-.flight-card {
-border: 1px solid rgba(184,146,42,0.3);
-padding: 1rem 1.5rem;
-background: rgba(184,146,42,0.05);
-}
-
-.flight-label {
-font-family: ‘Georgia’, serif;
-font-size: 11px;
-letter-spacing: 0.3em;
-color: var(–gold);
-text-transform: uppercase;
-margin-bottom: 0.4rem;
-}
-
-.flight-info {
-font-size: clamp(16px, 1.6vw, 20px);
-color: var(–paper);
-font-weight: 600;
-letter-spacing: 0.05em;
-}
-
-.flight-time {
-font-size: 12px;
-color: var(–mist);
-margin-top: 0.2rem;
-font-weight: 300;
-}
-
-.scroll-hint {
-position: absolute;
-bottom: 3rem;
-left: 10vw;
-display: flex;
-align-items: center;
-gap: 1rem;
-color: var(–mist);
-font-size: 11px;
-letter-spacing: 0.3em;
-text-transform: uppercase;
-opacity: 0;
-animation: fadeUp 0.8s 1.2s forwards;
-}
-
-.scroll-hint::before {
-content: ‘’;
-width: 40px;
-height: 1px;
-background: var(–mist);
-animation: lineGrow 1s 1.5s forwards;
-transform-origin: left;
-transform: scaleX(0);
-}
-
-@keyframes lineGrow {
-to { transform: scaleX(1); }
-}
-
-/* DAYS CONTAINER */
-.days-container {
-padding: 6vw 10vw;
-background: var(–paper);
-}
-
-.section-label {
-font-family: ‘Georgia’, serif;
-font-style: italic;
-font-size: 13px;
-letter-spacing: 0.4em;
-color: var(–gold);
-text-transform: uppercase;
-margin-bottom: 4rem;
-display: flex;
-align-items: center;
-gap: 1.5rem;
-}
-
-.section-label::after {
-content: ‘’;
-flex: 1;
-height: 1px;
-background: linear-gradient(to right, var(–gold), transparent);
-opacity: 0.4;
-}
-
-/* DAY CARD */
-.day-card {
-display: grid;
-grid-template-columns: 80px 1fr;
-gap: 0;
-margin-bottom: 0;
-position: relative;
-opacity: 0;
-transform: translateY(30px);
-transition: opacity 0.6s, transform 0.6s;
-}
-
-.day-card.visible {
-opacity: 1;
-transform: translateY(0);
-}
-
-.day-card:not(:last-child)::after {
-content: ‘’;
-position: absolute;
-left: 39px;
-top: 72px;
-bottom: -1px;
-width: 1px;
-background: linear-gradient(to bottom, var(–gold), var(–cream));
-opacity: 0.4;
-}
-
-.day-number {
-display: flex;
-flex-direction: column;
-align-items: center;
-padding-top: 1.5rem;
-position: relative;
-z-index: 1;
-}
-
-.day-dot {
-width: 10px;
-height: 10px;
-background: var(–vermillion);
-border-radius: 50%;
-margin-bottom: 0.5rem;
-box-shadow: 0 0 0 4px var(–paper), 0 0 0 5px rgba(201,64,48,0.3);
-}
-
-.day-num-text {
-font-family: ‘Georgia’, serif;
-font-size: 11px;
-letter-spacing: 0.2em;
-color: var(–mist);
-writing-mode: vertical-rl;
-text-orientation: mixed;
-transform: rotate(180deg);
-margin-top: 0.5rem;
-}
-
-.day-content {
-padding: 1.5rem 0 3rem 2rem;
-border-left: none;
-}
-
-.day-header {
-margin-bottom: 1.5rem;
-}
-
-.day-date {
-font-family: ‘Georgia’, serif;
-font-style: italic;
-font-size: 12px;
-letter-spacing: 0.3em;
-color: var(–gold);
-text-transform: uppercase;
-margin-bottom: 0.4rem;
-}
-
-.day-title {
-font-size: clamp(22px, 3vw, 36px);
-font-weight: 900;
-color: var(–ink);
-line-height: 1.1;
-letter-spacing: -0.02em;
-}
-
-.day-subtitle {
-font-size: 13px;
-color: var(–mist);
-margin-top: 0.3rem;
-font-style: italic;
-}
-
-/* TIMELINE */
-.timeline {
-display: flex;
-flex-direction: column;
-gap: 0;
-}
-
-.timeline-item {
-display: grid;
-grid-template-columns: 70px 1fr;
-gap: 1rem;
-padding: 0.6rem 0;
-border-bottom: 1px solid rgba(138,132,120,0.1);
-transition: background 0.2s;
-}
-
-.timeline-item:hover {
-background: rgba(184,146,42,0.04);
-margin: 0 -1rem;
-padding-left: 1rem;
-padding-right: 1rem;
-}
-
-.timeline-item:last-child {
-border-bottom: none;
-}
-
-.tl-time {
-font-family: ‘Georgia’, serif;
-font-size: 13px;
-color: var(–gold);
-letter-spacing: 0.05em;
-padding-top: 0.15rem;
-white-space: nowrap;
-}
-
-.tl-body {}
-
-.tl-place {
-font-size: 15px;
-font-weight: 600;
-color: var(–ink);
-margin-bottom: 0.15rem;
-}
-
-.tl-place.highlight {
-color: var(–vermillion);
-}
-
-.tl-note {
-font-size: 12px;
-color: var(–mist);
-font-weight: 300;
-line-height: 1.5;
-}
-
-.tl-tag {
-display: inline-block;
-font-size: 10px;
-letter-spacing: 0.15em;
-text-transform: uppercase;
-padding: 2px 8px;
-border: 1px solid currentColor;
-border-radius: 2px;
-margin-left: 0.5rem;
-vertical-align: middle;
-font-weight: 400;
-}
-
-.tag-shop { color: var(–gold); }
-.tag-food { color: #7a9e6e; }
-.tag-warn { color: var(–vermillion); }
-.tag-arch { color: #6e8aad; }
-
-/* ALERT BOX */
-.alert-box {
-background: rgba(201,64,48,0.05);
-border-left: 3px solid var(–vermillion);
-padding: 0.8rem 1rem;
-margin-top: 1rem;
-font-size: 12px;
-color: var(–mist);
-line-height: 1.6;
-}
-
-.alert-box strong {
-color: var(–vermillion);
-font-weight: 600;
-}
-
-/* SHOPPING BADGE */
-.shopping-strip {
-background: var(–cream);
-border-left: 3px solid var(–gold);
-padding: 0.7rem 1rem;
-margin-top: 1rem;
-font-size: 12px;
-color: var(–mist);
-display: flex;
-align-items: center;
-gap: 0.5rem;
-}
-
-.shopping-strip strong {
-color: var(–gold);
-font-weight: 600;
-}
-
-/* TIPS SECTION */
-.tips-section {
-background: var(–dark-paper);
-padding: 6vw 10vw;
-color: var(–paper);
-}
-
-.tips-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-gap: 1.5rem;
-margin-top: 2rem;
-}
-
-.tip-item {
-border: 1px solid rgba(255,255,255,0.08);
-padding: 1.5rem;
-position: relative;
-overflow: hidden;
-transition: border-color 0.3s;
-}
-
-.tip-item:hover {
-border-color: rgba(184,146,42,0.4);
-}
-
-.tip-item::before {
-content: ‘’;
-position: absolute;
-top: 0; left: 0;
-width: 3px; height: 100%;
-background: var(–gold);
-opacity: 0;
-transition: opacity 0.3s;
-}
-
-.tip-item:hover::before { opacity: 1; }
-
-.tip-title {
-font-size: 13px;
-font-weight: 600;
-color: var(–gold);
-letter-spacing: 0.1em;
-margin-bottom: 0.5rem;
-}
-
-.tip-text {
-font-size: 12px;
-color: var(–mist);
-line-height: 1.7;
-font-weight: 300;
-}
-
-/* FOOTER */
-footer {
-background: var(–dark-paper);
-border-top: 1px solid rgba(255,255,255,0.05);
-padding: 2rem 10vw;
-display: flex;
-justify-content: space-between;
-align-items: center;
-flex-wrap: gap;
-}
-
-.footer-text {
-font-family: ‘Georgia’, serif;
-font-style: italic;
-font-size: 13px;
-color: var(–mist);
-letter-spacing: 0.1em;
-}
-
-.footer-dates {
-font-size: 12px;
-color: rgba(138,132,120,0.5);
-letter-spacing: 0.2em;
-}
-
-@keyframes fadeUp {
-from { opacity: 0; transform: translateY(20px); }
-to { opacity: 1; transform: translateY(0); }
-}
-
-/* Divider between days */
-.day-divider {
-height: 1px;
-background: linear-gradient(to right, transparent, rgba(138,132,120,0.2), transparent);
-margin: 0 0 0 80px;
-}
-
-@media (max-width: 600px) {
-.hero { padding: 12vw 6vw; }
-.days-container { padding: 10vw 6vw; }
-.day-card { grid-template-columns: 50px 1fr; }
-.day-card:not(:last-child)::after { left: 24px; }
-.day-dot { }
-.tips-section { padding: 10vw 6vw; }
-footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: center; }
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Serif TC', 'Georgia', serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 8vw 10vw;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--dark-paper);
+  }
+  .hero::after {
+    content: '大阪';
+    position: absolute;
+    right: -2vw;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: clamp(200px, 30vw, 420px);
+    font-weight: 900;
+    color: rgba(255,255,255,0.03);
+    letter-spacing: -0.05em;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .hero-badge {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-style: italic;
+    font-size: clamp(12px, 1.2vw, 16px);
+    color: var(--gold);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-title {
+    font-size: clamp(48px, 8vw, 120px);
+    font-weight: 900;
+    color: var(--paper);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero-title span { color: var(--vermillion); }
+  .hero-sub {
+    font-size: clamp(14px, 1.4vw, 18px);
+    color: var(--mist);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+    max-width: 480px;
+    line-height: 1.8;
+  }
+  .hero-flights {
+    margin-top: 3rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+  .flight-card {
+    border: 1px solid rgba(184,146,42,0.3);
+    padding: 1rem 1.5rem;
+    background: rgba(184,146,42,0.05);
+  }
+  .flight-label {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .flight-info {
+    font-size: clamp(16px, 1.6vw, 20px);
+    color: var(--paper);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .flight-time {
+    font-size: 12px;
+    color: var(--mist);
+    margin-top: 0.2rem;
+    font-weight: 300;
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 3rem;
+    left: 10vw;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--mist);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.2s forwards;
+  }
+  .scroll-hint::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--mist);
+    animation: lineGrow 1s 1.5s forwards;
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+  @keyframes lineGrow { to { transform: scaleX(1); } }
+  /* ── THEME STRIP ── */
+  .theme-strip {
+    background: var(--cream);
+    padding: 2.5rem 10vw;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    border-bottom: 1px solid rgba(138,132,120,0.15);
+  }
+  .theme-item {
+    flex: 1;
+    min-width: 160px;
+    padding: 0 2rem 0 0;
+    border-right: 1px solid rgba(138,132,120,0.2);
+    margin-right: 2rem;
+  }
+  .theme-item:last-child { border-right: none; margin-right: 0; }
+  .theme-day {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .theme-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+  .theme-sub {
+    font-size: 11px;
+    color: var(--mist);
+    font-style: italic;
+    line-height: 1.5;
+  }
+  /* ── DAYS ── */
+  .days-container {
+    padding: 6vw 10vw;
+    background: var(--paper);
+  }
+  .section-label {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 4rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    opacity: 0.4;
+  }
+  .day-card {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .day-card.visible { opacity: 1; transform: translateY(0); }
+  .day-card:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 39px;
+    top: 72px;
+    bottom: -1px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), var(--cream));
+    opacity: 0.4;
+  }
+  .day-number {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .day-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--vermillion);
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 0 0 4px var(--paper), 0 0 0 5px rgba(201,64,48,0.3);
+  }
+  .day-num-text {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--mist);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    margin-top: 0.5rem;
+  }
+  .day-content { padding: 1.5rem 0 3rem 2rem; }
+  .day-header { margin-bottom: 1.5rem; }
+  .day-date {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .day-title {
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .day-subtitle {
+    font-size: 13px;
+    color: var(--mist);
+    margin-top: 0.3rem;
+    font-style: italic;
+  }
+  .day-theme-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 1px solid rgba(184,146,42,0.4);
+    color: var(--gold);
+    margin-top: 0.5rem;
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-style: italic;
+  }
+  /* ── TIMELINE ── */
+  .timeline { display: flex; flex-direction: column; }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(138,132,120,0.1);
+    transition: background 0.2s, padding 0.2s;
+  }
+  .timeline-item:hover {
+    background: rgba(184,146,42,0.04);
+    margin: 0 -1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .tl-time {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    padding-top: 0.15rem;
+    white-space: nowrap;
+  }
+  .tl-place {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.15rem;
+  }
+  .tl-place.highlight { color: var(--vermillion); }
+  .tl-note {
+    font-size: 12px;
+    color: var(--mist);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+  .tl-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    font-weight: 400;
+  }
+  .tag-shop { color: var(--gold); }
+  .tag-food { color: #7a9e6e; }
+  .tag-warn { color: var(--vermillion); }
+  .tag-arch { color: #6e8aad; }
+  .tag-unesco { color: #9b7fc4; }
+  .tag-flex { color: #8a9e7a; }
+  .alert-box {
+    background: rgba(201,64,48,0.05);
+    border-left: 3px solid var(--vermillion);
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+    font-size: 12px;
+    color: var(--mist);
+    line-height: 1.6;
+  }
+  .alert-box strong { color: var(--vermillion); font-weight: 600; }
+  /* ── TIPS ── */
+  .tips-section {
+    background-color: var(--dark-paper);
+    padding: 6vw 10vw;
+    color: var(--paper);
+  }
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .tip-item {
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .tip-item:hover { border-color: rgba(184,146,42,0.4); }
+  .tip-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--gold);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .tip-item:hover::before { opacity: 1; }
+  .tip-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+  .tip-text {
+    font-size: 12px;
+    color: var(--mist);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  /* ── FOOTER ── */
+  footer {
+    background-color: var(--dark-paper);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 2rem 10vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .footer-text {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--mist);
+    letter-spacing: 0.1em;
+  }
+  .footer-dates {
+    font-size: 12px;
+    color: rgba(138,132,120,0.5);
+    letter-spacing: 0.2em;
+  }
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .hero { padding: 12vw 6vw; }
+    .days-container { padding: 10vw 6vw; }
+    .day-card { grid-template-columns: 50px 1fr; }
+    .day-card:not(:last-child)::after { left: 24px; }
+    .tips-section { padding: 10vw 6vw; }
+    footer { padding: 2rem 6vw; flex-direction: column; text-align: center; }
+    .hero-flights { flex-direction: column; }
+    .theme-strip { padding: 2rem 6vw; }
+  }
 </style>
-
 </head>
 <body>
 
-<!-- HERO -->
+<!-- ── HERO ── -->
 
 <section class="hero">
   <div class="hero-badge">Golden Week 2026 ・ Travel Itinerary</div>
   <h1 class="hero-title">黃金週<br><span>大阪</span></h1>
   <p class="hero-sub">五天五夜，從本町出發。港都神戶到宇治茶香，戰後建築到難波燈火。</p>
-
   <div class="hero-flights">
     <div class="flight-card">
       <div class="flight-label">去程 Outbound</div>
@@ -519,18 +461,42 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
       <div class="flight-time">5/6（三）　KIX 14:00 → TPE 16:00</div>
     </div>
   </div>
-
   <div class="scroll-hint">Scroll to explore</div>
 </section>
 
-<!-- DAYS -->
+<!-- ── THEME STRIP ── -->
+
+<div class="theme-strip">
+  <div class="theme-item">
+    <div class="theme-day">D2 · 5/2</div>
+    <div class="theme-title">尺度</div>
+    <div class="theme-sub">天守閣的垂直感<br>港灣的水平延伸</div>
+  </div>
+  <div class="theme-item">
+    <div class="theme-day">D3 · 5/3</div>
+    <div class="theme-title">複製與真實</div>
+    <div class="theme-sub">陶板名畫的文明複製<br>工程極限的真實存在</div>
+  </div>
+  <div class="theme-item">
+    <div class="theme-day">D4 · 5/4</div>
+    <div class="theme-title">沉澱</div>
+    <div class="theme-sub">茶 × 世遺 × 靜水<br>時間在此凝固</div>
+  </div>
+  <div class="theme-item">
+    <div class="theme-day">D5 · 5/5</div>
+    <div class="theme-title">制度的痕跡</div>
+    <div class="theme-sub">商業復甦的市民之臉<br>由下而上的重建</div>
+  </div>
+</div>
+
+<!-- ── DAYS ── -->
 
 <section class="days-container">
   <div class="section-label">行程總覽 Day by Day</div>
 
   <!-- DAY 1 -->
 
-  <div class="day-card" data-day="1">
+  <div class="day-card">
     <div class="day-number">
       <div class="day-dot"></div>
       <div class="day-num-text">DAY 1</div>
@@ -553,21 +519,21 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
           <div class="tl-time">22:00</div>
           <div class="tl-body">
             <div class="tl-place">關西空港抵達</div>
-            <div class="tl-note">入境・提領行李</div>
+            <div class="tl-note">入境・提領行李・行李轉盤為當晚最大變數，黃金週等待時間不可預期</div>
           </div>
         </div>
         <div class="timeline-item">
           <div class="tl-time">22:30</div>
           <div class="tl-body">
-            <div class="tl-place">空港急行 → 難波 → 本町</div>
-            <div class="tl-note">地鐵中央線・約40分</div>
+            <div class="tl-place">南海電鐵空港急行 → 難波</div>
+            <div class="tl-note">PASMO／Apple Wallet ICOCA 直接刷卡・末班車 23:55，務必趕上</div>
           </div>
         </div>
         <div class="timeline-item">
           <div class="tl-time">23:30</div>
           <div class="tl-body">
             <div class="tl-place highlight">Super Hotel Premium 本町</div>
-            <div class="tl-note">辦理入住・便利商店解決晚餐</div>
+            <div class="tl-note">辦理入住・便利商店解決晚餐・明早 07:00 出發，早點休息</div>
           </div>
         </div>
       </div>
@@ -576,7 +542,7 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
 
   <!-- DAY 2 -->
 
-  <div class="day-card" data-day="2">
+  <div class="day-card">
     <div class="day-number">
       <div class="day-dot"></div>
       <div class="day-num-text">DAY 2</div>
@@ -586,62 +552,98 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
         <div class="day-date">5 / 2　Saturday</div>
         <div class="day-title">姬路城・神戶</div>
         <div class="day-subtitle">白鷺天守 × 港灣夕照</div>
+        <div class="day-theme-tag">尺度</div>
       </div>
       <div class="timeline">
         <div class="timeline-item">
-          <div class="tl-time">07:30</div>
+          <div class="tl-time">07:00</div>
           <div class="tl-body">
             <div class="tl-place">本町出發</div>
-            <div class="tl-note">地鐵 → 大阪站 → JR神戶線</div>
+            <div class="tl-note">地鐵 → 大阪駅 07:15 搭新快速 → 姬路 08:35 抵達・步行至城門約15分</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="tl-time">09:00</div>
+          <div class="tl-time">08:50</div>
           <div class="tl-body">
-            <div class="tl-place highlight">姬路城</div>
-            <div class="tl-note">開館即入・天守閣排隊早去早好</div>
+            <div class="tl-place highlight">姬路城<span class="tl-tag tag-unesco">世遺</span></div>
+            <div class="tl-note">開城第一波・人潮最少・天守閣排隊效率最高・外觀即可，進不去也認</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-time">10:50</div>
+          <div class="tl-body">
+            <div class="tl-place">姬路城出城・步行回車站</div>
+            <div class="tl-note">兩小時為極限・10:50 出城剛好</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-time">11:15</div>
+          <div class="tl-body">
+            <div class="tl-place">姬路站周邊午餐<span class="tl-tag tag-food">食</span></div>
+            <div class="tl-note">穴子飯・豆腐御膳・吃快一點，留時間給神戶</div>
           </div>
         </div>
         <div class="timeline-item">
           <div class="tl-time">12:00</div>
           <div class="tl-body">
-            <div class="tl-place">姬路周邊午餐<span class="tl-tag tag-food">食</span></div>
-            <div class="tl-note">穴子飯・豆腐御膳</div>
+            <div class="tl-place">姬路站搭 JR 往神戶</div>
+            <div class="tl-note">約30分・三宮 12:30 抵達</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-time">12:45</div>
+          <div class="tl-body">
+            <div class="tl-place highlight">北野坂・異人館區</div>
+            <div class="tl-note">從三宮往北開始爬坡・風見雞之館、魚鱗之家外觀沿途路過・洋館是風景，不是目的地</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-time">13:30</div>
+          <div class="tl-body">
+            <div class="tl-place highlight">北野天滿神社 ⛩️</div>
+            <div class="tl-note">坡頂錨點・北野區視野最開的一點・俯瞰神戶港・以坡頂為終點，異人館區自然成了過程</div>
           </div>
         </div>
         <div class="timeline-item">
           <div class="tl-time">14:00</div>
           <div class="tl-body">
-            <div class="tl-place highlight">神戶三宮・北野異人館</div>
-            <div class="tl-note">JR約30分抵達</div>
+            <div class="tl-place">北野坂午茶<span class="tl-tag tag-food">食</span></div>
+            <div class="tl-note">下坡段獨立咖啡廳・坐下來面對坡道・神戶的重力感還在</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="tl-time">16:00</div>
+          <div class="tl-time">15:00</div>
           <div class="tl-body">
-            <div class="tl-place highlight">神戶港塔</div>
-            <div class="tl-note">整修後重新開放・夕陽前最美</div>
+            <div class="tl-place">下山往港塔</div>
+            <div class="tl-note">步行約15分</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="tl-time">18:00</div>
+          <div class="tl-time">15:15</div>
+          <div class="tl-body">
+            <div class="tl-place highlight">神戶港塔・上塔</div>
+            <div class="tl-note">整修後重新開放・日落前光線從下午慢慢走到黃昏</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-time">17:30</div>
           <div class="tl-body">
             <div class="tl-place">返回大阪難波</div>
             <div class="tl-note">約1小時車程</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="tl-time">19:30</div>
+          <div class="tl-time">19:00</div>
           <div class="tl-body">
             <div class="tl-place">大丸心齋橋<span class="tl-tag tag-shop">購</span></div>
-            <div class="tl-note">精品・化妝品為主</div>
+            <div class="tl-note">精品・化妝品為主，點到為止</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="tl-time">21:00</div>
+          <div class="tl-time">20:15</div>
           <div class="tl-body">
-            <div class="tl-place">高島屋難波<span class="tl-tag tag-shop">購</span></div>
-            <div class="tl-note">地下食品街・生活雜貨</div>
+            <div class="tl-place">難波周邊晚餐<span class="tl-tag tag-food">食</span></div>
+            <div class="tl-note">找一間有點年紀的割烹或居酒屋坐下來，讓港塔夕照的餘韻有地方落地</div>
           </div>
         </div>
       </div>
@@ -650,7 +652,7 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
 
   <!-- DAY 3 -->
 
-  <div class="day-card" data-day="3">
+  <div class="day-card">
     <div class="day-number">
       <div class="day-dot"></div>
       <div class="day-num-text">DAY 3</div>
@@ -660,6 +662,7 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
         <div class="day-date">5 / 3　Sunday</div>
         <div class="day-title">明石・鳴門</div>
         <div class="day-subtitle">吊橋巨構 × 陶板美術館</div>
+        <div class="day-theme-tag">複製與真實</div>
       </div>
       <div class="timeline">
         <div class="timeline-item">
@@ -670,35 +673,49 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
           </div>
         </div>
         <div class="timeline-item">
-          <div class="tl-time">08:30</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">明石大橋（舞子公園）</div>
-            <div class="tl-note">JR舞子站・橋上展望台可入內</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">10:30</div>
+          <div class="tl-time">08:00</div>
           <div class="tl-body">
             <div class="tl-place">前往鳴門</div>
             <div class="tl-note">高速巴士約1.5小時</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="tl-time">12:00</div>
+          <div class="tl-time">09:30</div>
           <div class="tl-body">
             <div class="tl-place highlight">大塚美術館<span class="tl-tag tag-warn">需預約</span></div>
-            <div class="tl-note">停留建議3-4小時・黃金週務必提前線上預約</div>
+            <div class="tl-note">開館即入・以最清醒的狀態面對這個空間・停留2小時・黃金週務必提前線上購票</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="tl-time">16:30</div>
+          <div class="tl-time">11:30</div>
+          <div class="tl-body">
+            <div class="tl-place">出館・鳴門午餐<span class="tl-tag tag-flex">彈性</span></div>
+            <div class="tl-note">有位就坐鳴門鯛料理或周邊食堂・無位就便利商店解決，不為此卡時間</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-time">12:30</div>
+          <div class="tl-body">
+            <div class="tl-place">前往舞子</div>
+            <div class="tl-note">高速巴士回程・舞子為順路中途站，無需繞路</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-time">14:30</div>
+          <div class="tl-body">
+            <div class="tl-place highlight">明石大橋（舞子公園）</div>
+            <div class="tl-note">夕陽前後橋體輪廓最清晰・逆光散去後是最好的視覺時段・外觀觀賞即可</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-time">15:30</div>
           <div class="tl-body">
             <div class="tl-place">返回大阪</div>
-            <div class="tl-note">約2小時</div>
+            <div class="tl-note">JR舞子站・約1小時</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="tl-time">19:30</div>
+          <div class="tl-time">17:30</div>
           <div class="tl-body">
             <div class="tl-place">大丸梅田<span class="tl-tag tag-shop">購</span></div>
             <div class="tl-note">服飾・生活雜貨・13F餐廳街晚餐</div>
@@ -706,14 +723,14 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
         </div>
       </div>
       <div class="alert-box">
-        <strong>⚠ 重要提醒</strong>　大塚美術館黃金週一票難求，請於出發前務必完成線上購票。
+        <strong>⚠ 重要提醒</strong>　大塚美術館黃金週一票難求，請於出發前務必完成線上購票，建議至少提早2週購買。
       </div>
     </div>
   </div>
 
   <!-- DAY 4 -->
 
-  <div class="day-card" data-day="4">
+  <div class="day-card">
     <div class="day-number">
       <div class="day-dot"></div>
       <div class="day-num-text">DAY 4</div>
@@ -722,7 +739,8 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
       <div class="day-header">
         <div class="day-date">5 / 4　Monday</div>
         <div class="day-title">宇治茶香日</div>
-        <div class="day-subtitle">平等院 × 宇治川 × 伊藤久右衛門</div>
+        <div class="day-subtitle">平等院 × 宇治川 × 辻利兵衛本店</div>
+        <div class="day-theme-tag">沉澱</div>
       </div>
       <div class="timeline">
         <div class="timeline-item">
@@ -735,7 +753,7 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
         <div class="timeline-item">
           <div class="tl-time">10:00</div>
           <div class="tl-body">
-            <div class="tl-place highlight">平等院鳳凰堂</div>
+            <div class="tl-place highlight">平等院鳳凰堂<span class="tl-tag tag-unesco">世遺</span></div>
             <div class="tl-note">開館即入・10円硬幣上的風景</div>
           </div>
         </div>
@@ -749,14 +767,14 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
         <div class="timeline-item">
           <div class="tl-time">12:30</div>
           <div class="tl-body">
-            <div class="tl-place">伊藤久右衛門本店<span class="tl-tag tag-food">食</span></div>
-            <div class="tl-note">抹茶蕎麥麵套餐 ＋ 抹茶聖代</div>
+            <div class="tl-place">辻利兵衛本店<span class="tl-tag tag-food">食</span></div>
+            <div class="tl-note">宇治橋通本店・玉露冷麵或抹茶套餐，氣質素淡，與當日調性一致</div>
           </div>
         </div>
         <div class="timeline-item">
           <div class="tl-time">14:30</div>
           <div class="tl-body">
-            <div class="tl-place">宇治上神社・宇治神社</div>
+            <div class="tl-place">宇治上神社・宇治神社<span class="tl-tag tag-unesco">世遺</span></div>
             <div class="tl-note">世界遺產・靜謐感極強</div>
           </div>
         </div>
@@ -785,7 +803,7 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
 
   <!-- DAY 5 -->
 
-  <div class="day-card" data-day="5">
+  <div class="day-card">
     <div class="day-number">
       <div class="day-dot"></div>
       <div class="day-num-text">DAY 5</div>
@@ -794,80 +812,87 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
       <div class="day-header">
         <div class="day-date">5 / 5　Tuesday</div>
         <div class="day-title">戰後復興建築巡禮</div>
-        <div class="day-subtitle">北浜 × 中之島 × 大阪站周邊・步行軸線</div>
+        <div class="day-subtitle">北浜 × 中之島 × 適塾・步行軸線</div>
+        <div class="day-theme-tag">制度的痕跡</div>
       </div>
       <div class="timeline">
         <div class="timeline-item">
-          <div class="tl-time">09:00</div>
+          <div class="tl-time">08:00</div>
           <div class="tl-body">
             <div class="tl-place">本町出發・地鐵至北浜</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="tl-time">09:30</div>
+          <div class="tl-time">08:30</div>
           <div class="tl-body">
             <div class="tl-place highlight">北浜レトロビル<span class="tl-tag tag-arch">建</span></div>
-            <div class="tl-note">英國古典式・現為咖啡廳・可在此吃早餐</div>
+            <div class="tl-note">英國古典式・現為咖啡廳・在此吃早餐，讓當天有個從容的起點</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-time">09:30</div>
+          <div class="tl-body">
+            <div class="tl-place highlight">日本銀行大阪支店<span class="tl-tag tag-arch">建</span></div>
+            <div class="tl-note">明治期西洋建築・外觀即是全部，停步感受尺度，無需入內</div>
           </div>
         </div>
         <div class="timeline-item">
           <div class="tl-time">10:00</div>
           <div class="tl-body">
-            <div class="tl-place highlight">日本銀行大阪支店<span class="tl-tag tag-arch">建</span></div>
-            <div class="tl-note">明治期西洋建築・外觀嚴肅典雅</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">10:30</div>
-          <div class="tl-body">
             <div class="tl-place highlight">大阪市中央公會堂<span class="tl-tag tag-arch">建</span></div>
-            <div class="tl-note">1918年・辰野金吾設計・新巴洛克紅磚</div>
+            <div class="tl-note">1918年・辰野金吾設計・停留45分・廣場感強，今日最值得佇立的節點之一</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="tl-time">11:00</div>
+          <div class="tl-time">10:45</div>
           <div class="tl-body">
             <div class="tl-place highlight">綿業會館<span class="tl-tag tag-arch">建</span></div>
-            <div class="tl-note">1931年竣工・戰前紡織業全盛象徵</div>
+            <div class="tl-note">1931年竣工・戰前紡織業全盛象徵・外觀經過即可</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="tl-time">11:30</div>
+          <div class="tl-time">11:15</div>
           <div class="tl-body">
             <div class="tl-place highlight">適塾（緒方洪庵舊居）<span class="tl-tag tag-arch">建</span></div>
-            <div class="tl-note">蘭學啟蒙發源地・思想史意義深遠</div>
+            <div class="tl-note">蘭學啟蒙發源地・思想史意義深遠・停留1.5小時・今日最值得入內的一處，給足時間</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="tl-time">12:30</div>
+          <div class="tl-time">12:45</div>
           <div class="tl-body">
-            <div class="tl-place">中之島周邊午餐<span class="tl-tag tag-food">食</span></div>
-            <div class="tl-note">肥後橋割烹・老派洋食館</div>
+            <div class="tl-place">肥後橋午餐<span class="tl-tag tag-food">食</span></div>
+            <div class="tl-note">老派洋食館・讓上午的思想史有個踏實的落地</div>
           </div>
         </div>
         <div class="timeline-item">
           <div class="tl-time">14:00</div>
           <div class="tl-body">
             <div class="tl-place highlight">日本生命本館<span class="tl-tag tag-arch">建</span></div>
-            <div class="tl-note">昭和初期古典主義</div>
+            <div class="tl-note">昭和初期古典主義・外觀經過，感受量體</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="tl-time">15:00</div>
+          <div class="tl-time">14:30</div>
           <div class="tl-body">
-            <div class="tl-place highlight">大阪造幣局<span class="tl-tag tag-arch">建</span></div>
-            <div class="tl-note">黃金週請提前確認開放時間</div>
+            <div class="tl-place">隨處午茶・或回本町休息</div>
+            <div class="tl-note">這天走的全是需要消化的空間，給自己一段無目的的時間</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="tl-time">18:30</div>
+          <div class="tl-time">16:00</div>
+          <div class="tl-body">
+            <div class="tl-place">前往梅田</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-time">17:30</div>
           <div class="tl-body">
             <div class="tl-place">梅田晚餐<span class="tl-tag tag-food">食</span></div>
-            <div class="tl-note">老舖洋食或居酒屋</div>
+            <div class="tl-note">老舖洋食或居酒屋・提早入座避開黃金週人潮</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="tl-time">20:00</div>
+          <div class="tl-time">19:30</div>
           <div class="tl-body">
             <div class="tl-place">大丸梅田<span class="tl-tag tag-shop">購</span></div>
             <div class="tl-note">伴手禮集中採購・最後一次大規模購物</div>
@@ -879,7 +904,7 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
 
   <!-- DAY 6 -->
 
-  <div class="day-card" data-day="6">
+  <div class="day-card">
     <div class="day-number">
       <div class="day-dot"></div>
       <div class="day-num-text">DAY 6</div>
@@ -901,7 +926,7 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
           <div class="tl-time">10:00</div>
           <div class="tl-body">
             <div class="tl-place highlight">高島屋難波<span class="tl-tag tag-shop">購</span></div>
-            <div class="tl-note">開門衝地下食品街・伴手禮最終掃貨</div>
+            <div class="tl-note">開門衝地下食品街・抹茶伴手禮最終掃貨</div>
           </div>
         </div>
         <div class="timeline-item">
@@ -937,14 +962,14 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
 
 </section>
 
-<!-- TIPS -->
+<!-- ── TIPS ── -->
 
 <section class="tips-section">
   <div class="section-label" style="color: var(--gold);">關鍵提醒 Key Notes</div>
   <div class="tips-grid">
     <div class="tip-item">
       <div class="tip-title">大塚美術館</div>
-      <div class="tip-text">黃金週一票難求，務必提前至官網預約門票，建議至少提早2週購買。</div>
+      <div class="tip-text">黃金週一票難求，務必提前至官網預約門票，建議至少提早2週購買。館內五層樓，遇到座位就坐，不要逞強連走。</div>
     </div>
     <div class="tip-item">
       <div class="tip-title">平等院鳳凰堂</div>
@@ -952,27 +977,27 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
     </div>
     <div class="tip-item">
       <div class="tip-title">姬路城</div>
-      <div class="tip-text">天守閣內部排隊時間長，上午抵達為最佳選擇，下午人潮反流。</div>
+      <div class="tip-text">外觀即完整，天守閣視排隊狀況決定是否入內。從三之丸廣場看白鷺城已是最佳視角。</div>
     </div>
     <div class="tip-item">
       <div class="tip-title">購物路線分工</div>
-      <div class="tip-text">大丸梅田→服飾雜貨｜大丸心齋橋→精品彩妝｜高島屋難波→食品伴手禮</div>
+      <div class="tip-text">大丸梅田→服飾雜貨｜大丸心齋橋→精品彩妝｜高島屋難波→食品抹茶伴手禮</div>
     </div>
     <div class="tip-item">
       <div class="tip-title">交通票券</div>
-      <div class="tip-text">建議購入 ICOCA IC卡，全程通用，省去找零麻煩。視行程可評估是否搭配一日券。</div>
+      <div class="tip-text">建議購入 ICOCA IC卡，全程通用，省去找零麻煩。本町基地位置優異，至難波、心齋橋、梅田均在15分鐘內。</div>
     </div>
     <div class="tip-item">
       <div class="tip-title">5/6 返台節奏</div>
       <div class="tip-text">CI0153 航班 14:00 出發，11:15 前必須離開難波，行李務必前一晚整理完畢。</div>
     </div>
     <div class="tip-item">
-      <div class="tip-title">本町基地優勢</div>
-      <div class="tip-text">中央線串連東西，至難波、心齋橋、梅田均在15分鐘內，交通效率極高。</div>
+      <div class="tip-title">步行耐力提醒</div>
+      <div class="tip-text">D3 大塚美術館單館約消耗 8,000–10,000 步，加上舞子外觀，當天接近日耗限，館內遇椅即坐。</div>
     </div>
     <div class="tip-item">
-      <div class="tip-title">大阪造幣局</div>
-      <div class="tip-text">黃金週期間通常需事先預約參觀，出發前請確認當年度開放資訊。</div>
+      <div class="tip-title">宇治抹茶採購</div>
+      <div class="tip-text">部分限定品項（如中村藤吉茶葉罐裝）在大阪不一定找得到，可視情況在宇治當地採購。</div>
     </div>
   </div>
 </section>
@@ -983,21 +1008,16 @@ footer { padding: 2rem 6vw; flex-direction: column; gap: 0.5rem; text-align: cen
 </footer>
 
 <script>
-  // Intersection Observer for scroll animations
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, 0);
+        entry.target.classList.add('visible');
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.day-card').forEach(card => {
-    observer.observe(card);
-  });
+  document.querySelectorAll('.day-card').forEach(card => observer.observe(card));
 </script>
 
 </body>
