@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>和制的原點</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
     --ink: #1a1209;
@@ -21,7 +18,7 @@
   body {
     background-color: var(--paper);
     color: var(--ink);
-    font-family: 'Noto Serif TC', 'Georgia', serif;
+    font-family: -apple-system, 'Hiragino Mincho ProN', 'Georgia', serif;
     font-weight: 300;
     min-height: 100vh;
     overflow-x: hidden;
@@ -35,7 +32,6 @@
     z-index: 1000;
     opacity: 0.4;
   }
-  /* ── HERO ── */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -149,7 +145,6 @@
     transform: scaleX(0);
   }
   @keyframes lineGrow { to { transform: scaleX(1); } }
-  /* ── THEME STRIP ── */
   .theme-strip {
     background: var(--cream);
     padding: 2.5rem 10vw;
@@ -186,7 +181,6 @@
     font-style: italic;
     line-height: 1.5;
   }
-  /* ── DAYS ── */
   .days-container {
     padding: 6vw 10vw;
     background: var(--paper);
@@ -214,9 +208,6 @@
     display: grid;
     grid-template-columns: 80px 1fr;
     position: relative;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s, transform 0.6s;
   }
   .day-card.visible { opacity: 1; transform: translateY(0); }
   .day-card:not(:last-child)::after {
@@ -291,7 +282,6 @@
     font-family: 'Cormorant Garamond', 'Georgia', serif;
     font-style: italic;
   }
-  /* ── TIMELINE ── */
   .timeline { display: flex; flex-direction: column; }
   .timeline-item {
     display: grid;
@@ -357,50 +347,39 @@
     line-height: 1.6;
   }
   .alert-box strong { color: var(--vermillion); font-weight: 600; }
-  /* ── TIPS ── */
-  .tips-section {
-    background-color: var(--dark-paper);
-    padding: 6vw 10vw;
-    color: var(--paper);
+  /* ── BOOKING STATUS ── */
+  .booking-section {
+    background: var(--dark-paper);
+    padding: 2rem 10vw;
+    border-bottom: 1px solid rgba(184,146,42,0.15);
   }
-  .tips-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-  }
-  .tip-item {
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 1.5rem;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s;
-  }
-  .tip-item:hover { border-color: rgba(184,146,42,0.4); }
-  .tip-item::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: var(--gold);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .tip-item:hover::before { opacity: 1; }
-  .tip-title {
-    font-size: 13px;
-    font-weight: 600;
+  .booking-title {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.35em;
     color: var(--gold);
-    letter-spacing: 0.1em;
-    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
   }
-  .tip-text {
-    font-size: 12px;
-    color: var(--mist);
-    line-height: 1.7;
-    font-weight: 300;
+  .booking-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
   }
-  /* ── FOOTER ── */
+  .booking-item { display: flex; flex-direction: column; gap: 0.2rem; }
+  .booking-label {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: rgba(184,146,42,0.6);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .booking-name { font-size: 12px; font-weight: 600; color: var(--paper); }
+  .booking-detail { font-size: 11px; color: var(--mist); font-weight: 300; }
+  .booking-confirmed { font-size: 10px; color: #7a9e6e; letter-spacing: 0.05em; margin-top: 0.4rem; }
+  @media (max-width: 600px) { .booking-section { padding: 2rem 6vw; } }
   footer {
     background-color: var(--dark-paper);
     border-top: 1px solid rgba(255,255,255,0.05);
@@ -423,18 +402,15 @@
     color: rgba(138,132,120,0.5);
     letter-spacing: 0.2em;
   }
-  /* ── ANIMATIONS ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  /* ── RESPONSIVE ── */
   @media (max-width: 600px) {
     .hero { padding: 12vw 6vw; }
     .days-container { padding: 10vw 6vw; }
     .day-card { grid-template-columns: 50px 1fr; }
     .day-card:not(:last-child)::after { left: 24px; }
-    .tips-section { padding: 10vw 6vw; }
     footer { padding: 2rem 6vw; flex-direction: column; text-align: center; }
     .hero-flights { flex-direction: column; }
     .theme-strip { padding: 2rem 6vw; }
@@ -443,12 +419,10 @@
 </head>
 <body>
 
-<!-- ── HERO ── -->
-
 <section class="hero">
   <div class="hero-badge">Kansai 2026 ・ Travel Itinerary</div>
   <h1 class="hero-title">和制<br><span>的原點</span></h1>
-  <p class="hero-sub">五天五夜，以本町為基地。尺度・摹本・沉積・殘響。</p>
+  <p class="hero-sub">五天五夜，以難波為基地。尺度・摹本・沉積・殘響。</p>
   <div class="hero-flights">
     <div class="flight-card">
       <div class="flight-label">去程 Outbound</div>
@@ -464,7 +438,45 @@
   <div class="scroll-hint">Scroll to explore</div>
 </section>
 
-<!-- ── THEME STRIP ── -->
+<!-- ── BOOKING STATUS ── -->
+
+<section class="booking-section">
+  <div class="booking-title">已確認訂單 Confirmed Bookings</div>
+  <div class="booking-grid">
+    <div class="booking-item">
+      <div class="booking-label">住宿</div>
+      <div class="booking-name">APA Hotel＆Resort 大阪なんば駅前タワー</div>
+      <div class="booking-detail">大阪市浪速區湊町 1-2-13・556-0017</div>
+      <div class="booking-confirmed">✓ 已確認　NT$12,135</div>
+    </div>
+    <div class="booking-item">
+      <div class="booking-label">機票</div>
+      <div class="booking-name">GK54 捷星日本　TPE → KIX</div>
+      <div class="booking-detail">5/1（五）18:20 → 22:00</div>
+      <div class="booking-name" style="margin-top:0.5rem">CI0153 中華航空　KIX → TPE</div>
+      <div class="booking-detail">5/6（三）14:00 → 16:00</div>
+      <div class="booking-confirmed">✓ 易遊網 ORD0028835670</div>
+    </div>
+    <div class="booking-item">
+      <div class="booking-label">景點票券</div>
+      <div class="booking-name">大塚國際美術館</div>
+      <div class="booking-detail">Etix 確認碼 34458717・JPY 3,160</div>
+      <div class="booking-name" style="margin-top:0.4rem">姬路城＋好古園 共通券</div>
+      <div class="booking-detail">しらさぎチケット #I87UKWVD</div>
+      <div class="booking-name" style="margin-top:0.4rem">神戶港塔</div>
+      <div class="booking-detail">Klook GHV987527・<span style="color:var(--vermillion)">指定 5/2 16:00</span></div>
+      <div class="booking-confirmed">✓ 三項已確認</div>
+    </div>
+    <div class="booking-item">
+      <div class="booking-label">高速巴士</div>
+      <div class="booking-name">難波 → 大塚美術館（D3）</div>
+      <div class="booking-detail">楽天トラベル・已付款</div>
+      <div class="booking-name" style="margin-top:0.4rem">大塚美術館 → 舞子（D3）</div>
+      <div class="booking-detail">発車オ～ライネット・已付款</div>
+      <div class="booking-confirmed">✓ 兩段已確認</div>
+    </div>
+  </div>
+</section>
 
 <div class="theme-strip">
   <div class="theme-item">
@@ -489,18 +501,13 @@
   </div>
 </div>
 
-<!-- ── DAYS ── -->
-
 <section class="days-container">
   <div class="section-label">行程總覽 Day by Day</div>
 
   <!-- DAY 1 -->
 
   <div class="day-card">
-    <div class="day-number">
-      <div class="day-dot"></div>
-      <div class="day-num-text">DAY 1</div>
-    </div>
+    <div class="day-number"><div class="day-dot"></div><div class="day-num-text">DAY 1</div></div>
     <div class="day-content">
       <div class="day-header">
         <div class="day-date">5 / 1　Friday</div>
@@ -508,34 +515,12 @@
         <div class="day-subtitle">落地即入夜，輕裝抵陣</div>
       </div>
       <div class="timeline">
-        <div class="timeline-item">
-          <div class="tl-time">18:20</div>
-          <div class="tl-body">
-            <div class="tl-place">桃園機場出發</div>
-            <div class="tl-note">GK54 捷星日本</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">22:00</div>
-          <div class="tl-body">
-            <div class="tl-place">關西空港抵達</div>
-            <div class="tl-note">入境・提領行李・行李轉盤為當晚最大變數，黃金週等待時間不可預期</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">22:30</div>
-          <div class="tl-body">
-            <div class="tl-place">南海電鐵空港急行 → 難波</div>
-            <div class="tl-note">PASMO／Apple Wallet ICOCA 直接刷卡・末班車 23:55，務必趕上</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">23:30</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">Super Hotel Premium 本町</div>
-            <div class="tl-note">辦理入住・便利商店解決晚餐・明早 07:00 出發，早點休息</div>
-          </div>
-        </div>
+        <div class="timeline-item"><div class="tl-time">13:00</div><div class="tl-body"><div class="tl-place">高鐵雲林站抵達</div><div class="tl-note">出發地：嘉義大林・訂位代號 08918110・826次・5車2A・<span style="color:var(--vermillion)">發車前務必取票</span></div></div></div>
+        <div class="timeline-item"><div class="tl-time">13:12</div><div class="tl-body"><div class="tl-place highlight">台灣高鐵 826 次出發</div><div class="tl-note">雲林 → 桃園 14:18</div></div></div>
+        <div class="timeline-item"><div class="tl-time">18:20</div><div class="tl-body"><div class="tl-place">桃園機場出發</div><div class="tl-note">GK54 捷星日本</div></div></div>
+        <div class="timeline-item"><div class="tl-time">22:00</div><div class="tl-body"><div class="tl-place">關西空港抵達</div><div class="tl-note">入境・提領行李・行李轉盤為當晚最大變數，黃金週等待時間不可預期</div></div></div>
+        <div class="timeline-item"><div class="tl-time">22:30</div><div class="tl-body"><div class="tl-place">南海電鐵空港急行 → 難波</div><div class="tl-note">PASMO／Apple Wallet ICOCA 直接刷卡・末班車 23:55，務必趕上</div></div></div>
+        <div class="timeline-item"><div class="tl-time">23:30</div><div class="tl-body"><div class="tl-place highlight">APA Hotel＆Resort 大阪なんば駅前タワー</div><div class="tl-note">辦理入住・便利商店解決晚餐・明早 07:00 出發，早點休息</div></div></div>
       </div>
     </div>
   </div>
@@ -543,10 +528,7 @@
   <!-- DAY 2 -->
 
   <div class="day-card">
-    <div class="day-number">
-      <div class="day-dot"></div>
-      <div class="day-num-text">DAY 2</div>
-    </div>
+    <div class="day-number"><div class="day-dot"></div><div class="day-num-text">DAY 2</div></div>
     <div class="day-content">
       <div class="day-header">
         <div class="day-date">5 / 2　Saturday</div>
@@ -555,97 +537,19 @@
         <div class="day-theme-tag">尺度</div>
       </div>
       <div class="timeline">
-        <div class="timeline-item">
-          <div class="tl-time">07:00</div>
-          <div class="tl-body">
-            <div class="tl-place">本町出發</div>
-            <div class="tl-note">地鐵 → 大阪駅 07:15 搭新快速 → 姬路 08:35 抵達・步行至城門約15分</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">08:50</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">姬路城<span class="tl-tag tag-unesco">世遺</span></div>
-            <div class="tl-note">開城第一波・人潮最少・天守閣排隊效率最高・外觀即可，進不去也認</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">10:50</div>
-          <div class="tl-body">
-            <div class="tl-place">姬路城出城・步行回車站</div>
-            <div class="tl-note">兩小時為極限・10:50 出城剛好</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">11:15</div>
-          <div class="tl-body">
-            <div class="tl-place">姬路站周邊午餐<span class="tl-tag tag-food">食</span></div>
-            <div class="tl-note">穴子飯・豆腐御膳・吃快一點，留時間給神戶</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">12:00</div>
-          <div class="tl-body">
-            <div class="tl-place">姬路站搭 JR 往神戶</div>
-            <div class="tl-note">約30分・三宮 12:30 抵達</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">12:45</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">北野坂・異人館區</div>
-            <div class="tl-note">從三宮往北開始爬坡・風見雞之館、魚鱗之家外觀沿途路過・洋館是風景，不是目的地</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">13:30</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">北野天滿神社 ⛩️</div>
-            <div class="tl-note">坡頂錨點・北野區視野最開的一點・俯瞰神戶港・以坡頂為終點，異人館區自然成了過程</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">14:00</div>
-          <div class="tl-body">
-            <div class="tl-place">北野坂午茶<span class="tl-tag tag-food">食</span></div>
-            <div class="tl-note">下坡段獨立咖啡廳・坐下來面對坡道・神戶的重力感還在</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">15:00</div>
-          <div class="tl-body">
-            <div class="tl-place">下山往港塔</div>
-            <div class="tl-note">步行約15分</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">15:15</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">神戶港塔・上塔</div>
-            <div class="tl-note">整修後重新開放・日落前光線從下午慢慢走到黃昏</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">17:30</div>
-          <div class="tl-body">
-            <div class="tl-place">返回大阪難波</div>
-            <div class="tl-note">約1小時車程</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">19:00</div>
-          <div class="tl-body">
-            <div class="tl-place">大丸心齋橋<span class="tl-tag tag-shop">購</span></div>
-            <div class="tl-note">精品・化妝品為主，點到為止</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">20:15</div>
-          <div class="tl-body">
-            <div class="tl-place">難波周邊晚餐<span class="tl-tag tag-food">食</span></div>
-            <div class="tl-note">找一間有點年紀的割烹或居酒屋坐下來，讓港塔夕照的餘韻有地方落地</div>
-          </div>
-        </div>
+        <div class="timeline-item"><div class="tl-time">07:00</div><div class="tl-body"><div class="tl-place">難波出發</div><div class="tl-note">JR難波駅→大阪駅 07:15 搭新快速 → 姬路 08:35 抵達・步行至城門約15分・ICOCA 刷卡</div></div></div>
+        <div class="timeline-item"><div class="tl-time">08:50</div><div class="tl-body"><div class="tl-place highlight">姬路城<span class="tl-tag tag-unesco">世遺</span></div><div class="tl-note">開城第一波・人潮最少・外觀即可，進不去也認</div></div></div>
+        <div class="timeline-item"><div class="tl-time">10:50</div><div class="tl-body"><div class="tl-place">姬路城出城・步行回車站</div><div class="tl-note">兩小時為極限・10:50 出城剛好</div></div></div>
+        <div class="timeline-item"><div class="tl-time">11:15</div><div class="tl-body"><div class="tl-place">姬路站周邊午餐<span class="tl-tag tag-food">食</span></div><div class="tl-note">穴子飯・豆腐御膳・吃快一點，留時間給神戶</div></div></div>
+        <div class="timeline-item"><div class="tl-time">12:00</div><div class="tl-body"><div class="tl-place">姬路站搭 JR 往神戶</div><div class="tl-note">JR神戶線新快速・約30分・三宮 12:30 抵達・ICOCA 刷卡</div></div></div>
+        <div class="timeline-item"><div class="tl-time">12:45</div><div class="tl-body"><div class="tl-place highlight">北野坂・異人館區</div><div class="tl-note">JR三ノ宮站中央口出・往山側步行北上・約20分抵北野坂・洋館是風景，不是目的地</div></div></div>
+        <div class="timeline-item"><div class="tl-time">13:30</div><div class="tl-body"><div class="tl-place highlight">北野天滿神社 ⛩️</div><div class="tl-note">坡頂錨點・俯瞰神戶港・以坡頂為終點，異人館區自然成了過程</div></div></div>
+        <div class="timeline-item"><div class="tl-time">14:00</div><div class="tl-body"><div class="tl-place">北野坂午茶<span class="tl-tag tag-food">食</span></div><div class="tl-note">下坡段獨立咖啡廳・坐下來面對坡道・神戶的重力感還在</div></div></div>
+        <div class="timeline-item"><div class="tl-time">15:00</div><div class="tl-body"><div class="tl-place">下山往港塔</div><div class="tl-note">步行約15分</div></div></div>
+        <div class="timeline-item"><div class="tl-time">15:15</div><div class="tl-body"><div class="tl-place highlight">神戶港塔</div><div class="tl-note">整修後重新開放・外觀即可，進不去也認・日落前光線從下午慢慢走到黃昏</div></div></div>
+        <div class="timeline-item"><div class="tl-time">17:30</div><div class="tl-body"><div class="tl-place">返回大阪難波</div><div class="tl-note">步行至元町站約10分・阪神電鐵元町→大阪難波 約35分・ICOCA 刷卡</div></div></div>
+        <div class="timeline-item"><div class="tl-time">19:00</div><div class="tl-body"><div class="tl-place">大丸心齋橋<span class="tl-tag tag-shop">購</span></div><div class="tl-note">精品・化妝品為主，點到為止</div></div></div>
+        <div class="timeline-item"><div class="tl-time">20:15</div><div class="tl-body"><div class="tl-place">難波周邊晚餐<span class="tl-tag tag-food">食</span></div><div class="tl-note">找一間有點年紀的割烹或居酒屋坐下來，讓港塔夕照的餘韻有地方落地</div></div></div>
       </div>
     </div>
   </div>
@@ -653,10 +557,7 @@
   <!-- DAY 3 -->
 
   <div class="day-card">
-    <div class="day-number">
-      <div class="day-dot"></div>
-      <div class="day-num-text">DAY 3</div>
-    </div>
+    <div class="day-number"><div class="day-dot"></div><div class="day-num-text">DAY 3</div></div>
     <div class="day-content">
       <div class="day-header">
         <div class="day-date">5 / 3　Sunday</div>
@@ -665,62 +566,15 @@
         <div class="day-theme-tag">摹本</div>
       </div>
       <div class="timeline">
-        <div class="timeline-item">
-          <div class="tl-time">07:00</div>
-          <div class="tl-body">
-            <div class="tl-place">本町早出發</div>
-            <div class="tl-note">今日行程最長・務必早起</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">08:00</div>
-          <div class="tl-body">
-            <div class="tl-place">難波出發・高速巴士</div>
-            <div class="tl-note">直達大塚美術館・約1.5小時</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">09:30</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">大塚美術館<span class="tl-tag tag-warn">需預約</span></div>
-            <div class="tl-note">開館即入・以最清醒的狀態面對這個空間・停留2小時・黃金週務必提前線上購票</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">11:30</div>
-          <div class="tl-body">
-            <div class="tl-place">出館・就近午餐<span class="tl-tag tag-flex">彈性</span></div>
-            <div class="tl-note">有位就坐鯛料理或周邊食堂・無位就便利商店解決，不為此卡時間</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">12:30</div>
-          <div class="tl-body">
-            <div class="tl-place">搭高速巴士往舞子</div>
-            <div class="tl-note">回程順路中途下車・無需繞路</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">14:30</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">明石大橋（舞子公園）</div>
-            <div class="tl-note">夕陽前後橋體輪廓最清晰・逆光散去後是最好的視覺時段・外觀觀賞即可</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">15:30</div>
-          <div class="tl-body">
-            <div class="tl-place">返回大阪</div>
-            <div class="tl-note">JR舞子站・約1小時</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">17:30</div>
-          <div class="tl-body">
-            <div class="tl-place">大丸梅田<span class="tl-tag tag-shop">購</span></div>
-            <div class="tl-note">服飾・生活雜貨・13F餐廳街晚餐</div>
-          </div>
-        </div>
+        <div class="timeline-item"><div class="tl-time">07:00</div><div class="tl-body"><div class="tl-place">難波出發</div><div class="tl-note">步行至JR難波（湊町BT）約5分</div></div></div>
+        <div class="timeline-item"><div class="tl-time">07:35</div><div class="tl-body"><div class="tl-place highlight">JR難波（湊町BT）出發・高速巴士</div><div class="tl-note">阿波EXP大阪3號・予約番號 37493999・座位 01號車1樓05D・<span style="color:var(--vermillion)">QR Code 乘車前24小時取得</span></div></div></div>
+        <div class="timeline-item"><div class="tl-time">09:38</div><div class="tl-body"><div class="tl-place">高速鳴門站下車</div><div class="tl-note">步行至大塚美術館約15分</div></div></div>
+        <div class="timeline-item"><div class="tl-time">09:30</div><div class="tl-body"><div class="tl-place highlight">大塚美術館<span class="tl-tag tag-warn">需預約</span></div><div class="tl-note">開館即入・以最清醒的狀態面對這個空間・停留2小時</div></div></div>
+        <div class="timeline-item"><div class="tl-time">11:30</div><div class="tl-body"><div class="tl-place">出館・就近午餐<span class="tl-tag tag-flex">彈性</span></div><div class="tl-note">有位就坐鯛料理或周邊食堂・無位就便利商店解決，不為此卡時間</div></div></div>
+        <div class="timeline-item"><div class="tl-time">15:00</div><div class="tl-body"><div class="tl-place highlight">高速鳴門→高速舞子・巴士</div><div class="tl-note">徳島バス・予約番號 04028037801・座位 01號車1D・出示 email 或モバイルチケット・15:59 舞子抵達</div></div></div>
+        <div class="timeline-item"><div class="tl-time">16:00</div><div class="tl-body"><div class="tl-place highlight">明石大橋（舞子公園）</div><div class="tl-note">步行至舞子公園即見・夕陽前後橋體輪廓最清晰・外觀觀賞即可</div></div></div>
+        <div class="timeline-item"><div class="tl-time">16:30</div><div class="tl-body"><div class="tl-place">返回大阪難波</div><div class="tl-note">步行至JR舞子站約5分・JR神戶線→大阪→大阪難波・約1小時・ICOCA 刷卡</div></div></div>
+        <div class="timeline-item"><div class="tl-time">17:30</div><div class="tl-body"><div class="tl-place">大丸梅田<span class="tl-tag tag-shop">購</span></div><div class="tl-note">服飾・生活雜貨・13F餐廳街晚餐</div></div></div>
       </div>
       <div class="alert-box">
         <strong>⚠ 重要提醒</strong>　大塚美術館黃金週一票難求，請於出發前務必完成線上購票，建議至少提早2週購買。
@@ -731,72 +585,24 @@
   <!-- DAY 4 -->
 
   <div class="day-card">
-    <div class="day-number">
-      <div class="day-dot"></div>
-      <div class="day-num-text">DAY 4</div>
-    </div>
+    <div class="day-number"><div class="day-dot"></div><div class="day-num-text">DAY 4</div></div>
     <div class="day-content">
       <div class="day-header">
         <div class="day-date">5 / 4　Monday</div>
         <div class="day-title">宇治茶香日</div>
-        <div class="day-subtitle">平等院 × 宇治川 × 辻利兵衛本店</div>
+        <div class="day-subtitle">平等院 × 宇治川 × 上林春松 × 辻利兵衛</div>
         <div class="day-theme-tag">沉積</div>
       </div>
       <div class="timeline">
-        <div class="timeline-item">
-          <div class="tl-time">08:30</div>
-          <div class="tl-body">
-            <div class="tl-place">本町出發</div>
-            <div class="tl-note">地鐵 → 鶴橋 → 近鐵宇治線</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">10:00</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">平等院鳳凰堂<span class="tl-tag tag-unesco">世遺</span></div>
-            <div class="tl-note">開館即入・10円硬幣上的風景</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">11:30</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">宇治川散步</div>
-            <div class="tl-note">橘橋・中之島周邊</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">12:30</div>
-          <div class="tl-body">
-            <div class="tl-place">辻利兵衛本店<span class="tl-tag tag-food">食</span></div>
-            <div class="tl-note">宇治橋通本店・玉露冷麵或抹茶套餐，氣質素淡，與當日調性一致</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">14:30</div>
-          <div class="tl-body">
-            <div class="tl-place">宇治上神社・宇治神社<span class="tl-tag tag-unesco">世遺</span></div>
-            <div class="tl-note">世界遺產・靜謐感極強</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">16:00</div>
-          <div class="tl-body">
-            <div class="tl-place">返回大阪</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">19:00</div>
-          <div class="tl-body">
-            <div class="tl-place">高島屋難波<span class="tl-tag tag-shop">購</span></div>
-            <div class="tl-note">晚餐 ＋ 雜貨補購</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">20:30</div>
-          <div class="tl-body">
-            <div class="tl-place">心齋橋藥妝<span class="tl-tag tag-shop">購</span></div>
-          </div>
-        </div>
+        <div class="timeline-item"><div class="tl-time">08:30</div><div class="tl-body"><div class="tl-place">難波出發</div><div class="tl-note">大阪難波駅→近鐵京都線→大久保→近鐵宇治線→近鐵小倉站（平等院最近站）・全程約1小時・ICOCA 刷卡</div></div></div>
+        <div class="timeline-item"><div class="tl-time">10:00</div><div class="tl-body"><div class="tl-place highlight">平等院鳳凰堂<span class="tl-tag tag-unesco">世遺</span></div><div class="tl-note">開館即入・10円硬幣上的風景</div></div></div>
+        <div class="timeline-item"><div class="tl-time">11:30</div><div class="tl-body"><div class="tl-place highlight">宇治川散步</div><div class="tl-note">橘橋・中之島周邊</div></div></div>
+        <div class="timeline-item"><div class="tl-time">12:15</div><div class="tl-body"><div class="tl-place">上林春松本店<span class="tl-tag tag-shop">購</span></div><div class="tl-note">室町時代創業・將軍家御用茶師・以茶葉採購為主・品項低調精緻，順路先買再吃</div></div></div>
+        <div class="timeline-item"><div class="tl-time">12:45</div><div class="tl-body"><div class="tl-place">辻利兵衛本店<span class="tl-tag tag-food">食</span></div><div class="tl-note">宇治橋通本店・玉露冷麵或抹茶套餐，氣質素淡，與當日調性一致</div></div></div>
+        <div class="timeline-item"><div class="tl-time">14:30</div><div class="tl-body"><div class="tl-place highlight">宇治上神社・宇治神社<span class="tl-tag tag-unesco">世遺</span></div><div class="tl-note">世界遺產・靜謐感極強</div></div></div>
+        <div class="timeline-item"><div class="tl-time">16:00</div><div class="tl-body"><div class="tl-place">返回大阪</div><div class="tl-note">近鐵宇治線→大久保→近鐵京都線→鶴橋→地鐵→難波・約1小時・ICOCA 刷卡</div></div></div>
+        <div class="timeline-item"><div class="tl-time">19:00</div><div class="tl-body"><div class="tl-place">高島屋難波<span class="tl-tag tag-shop">購</span></div><div class="tl-note">晚餐 ＋ 雜貨補購</div></div></div>
+        <div class="timeline-item"><div class="tl-time">20:30</div><div class="tl-body"><div class="tl-place">心齋橋藥妝<span class="tl-tag tag-shop">購</span></div></div></div>
       </div>
     </div>
   </div>
@@ -804,10 +610,7 @@
   <!-- DAY 5 -->
 
   <div class="day-card">
-    <div class="day-number">
-      <div class="day-dot"></div>
-      <div class="day-num-text">DAY 5</div>
-    </div>
+    <div class="day-number"><div class="day-dot"></div><div class="day-num-text">DAY 5</div></div>
     <div class="day-content">
       <div class="day-header">
         <div class="day-date">5 / 5　Tuesday</div>
@@ -816,88 +619,18 @@
         <div class="day-theme-tag">殘響</div>
       </div>
       <div class="timeline">
-        <div class="timeline-item">
-          <div class="tl-time">08:00</div>
-          <div class="tl-body">
-            <div class="tl-place">本町出發・地鐵至北浜</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">08:30</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">北浜レトロビル<span class="tl-tag tag-arch">建</span></div>
-            <div class="tl-note">英國古典式・現為咖啡廳・在此吃早餐，讓當天有個從容的起點</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">09:30</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">日本銀行大阪支店<span class="tl-tag tag-arch">建</span></div>
-            <div class="tl-note">明治期西洋建築・外觀即是全部，停步感受尺度，無需入內</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">10:00</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">大阪市中央公會堂<span class="tl-tag tag-arch">建</span></div>
-            <div class="tl-note">1918年・辰野金吾設計・停留45分・廣場感強，今日最值得佇立的節點之一</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">10:45</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">綿業會館<span class="tl-tag tag-arch">建</span></div>
-            <div class="tl-note">1931年竣工・戰前紡織業全盛象徵・外觀經過即可</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">11:15</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">適塾（緒方洪庵舊居）<span class="tl-tag tag-arch">建</span></div>
-            <div class="tl-note">蘭學啟蒙發源地・思想史意義深遠・停留1.5小時・今日最值得入內的一處，給足時間</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">12:45</div>
-          <div class="tl-body">
-            <div class="tl-place">肥後橋午餐<span class="tl-tag tag-food">食</span></div>
-            <div class="tl-note">老派洋食館・讓上午的思想史有個踏實的落地</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">14:00</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">日本生命本館<span class="tl-tag tag-arch">建</span></div>
-            <div class="tl-note">昭和初期古典主義・外觀經過，感受量體</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">14:30</div>
-          <div class="tl-body">
-            <div class="tl-place">隨處午茶・或回本町休息</div>
-            <div class="tl-note">這天走的全是需要消化的空間，給自己一段無目的的時間</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">16:00</div>
-          <div class="tl-body">
-            <div class="tl-place">前往梅田</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">17:30</div>
-          <div class="tl-body">
-            <div class="tl-place">梅田晚餐<span class="tl-tag tag-food">食</span></div>
-            <div class="tl-note">老舖洋食或居酒屋・提早入座避開黃金週人潮</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">19:30</div>
-          <div class="tl-body">
-            <div class="tl-place">大丸梅田<span class="tl-tag tag-shop">購</span></div>
-            <div class="tl-note">伴手禮集中採購・最後一次大規模購物</div>
-          </div>
-        </div>
+        <div class="timeline-item"><div class="tl-time">08:00</div><div class="tl-body"><div class="tl-place">難波出發・地鐵至北浜</div><div class="tl-note">大阪メトロ堺筋線 日本橋→北浜・約5分・ICOCA 刷卡</div></div></div>
+        <div class="timeline-item"><div class="tl-time">08:30</div><div class="tl-body"><div class="tl-place highlight">北浜レトロビル<span class="tl-tag tag-arch">建</span></div><div class="tl-note">英國古典式・現為咖啡廳・在此吃早餐，讓當天有個從容的起點</div></div></div>
+        <div class="timeline-item"><div class="tl-time">09:30</div><div class="tl-body"><div class="tl-place highlight">日本銀行大阪支店<span class="tl-tag tag-arch">建</span></div><div class="tl-note">明治期西洋建築・辰野金吾・外觀即是全部，停步感受尺度，無需入內</div></div></div>
+        <div class="timeline-item"><div class="tl-time">10:00</div><div class="tl-body"><div class="tl-place highlight">大阪市中央公會堂<span class="tl-tag tag-arch">建</span></div><div class="tl-note">1918年・辰野金吾設計・停留45分・廣場感強，今日最值得佇立的節點之一</div></div></div>
+        <div class="timeline-item"><div class="tl-time">10:45</div><div class="tl-body"><div class="tl-place highlight">綿業會館<span class="tl-tag tag-arch">建</span></div><div class="tl-note">1931年竣工・戰前紡織業全盛象徵・外觀經過即可</div></div></div>
+        <div class="timeline-item"><div class="tl-time">11:15</div><div class="tl-body"><div class="tl-place highlight">適塾（緒方洪庵舊居）<span class="tl-tag tag-arch">建</span></div><div class="tl-note">蘭學啟蒙發源地・思想史意義深遠・停留1.5小時・今日最值得入內的一處，給足時間</div></div></div>
+        <div class="timeline-item"><div class="tl-time">12:45</div><div class="tl-body"><div class="tl-place">肥後橋午餐<span class="tl-tag tag-food">食</span></div><div class="tl-note">老派洋食館・讓上午的思想史有個踏實的落地</div></div></div>
+        <div class="timeline-item"><div class="tl-time">14:00</div><div class="tl-body"><div class="tl-place highlight">日本生命本館<span class="tl-tag tag-arch">建</span></div><div class="tl-note">昭和初期古典主義・外觀經過，感受量體</div></div></div>
+        <div class="timeline-item"><div class="tl-time">14:30</div><div class="tl-body"><div class="tl-place">隨處午茶・或回本町休息</div><div class="tl-note">這天走的全是需要消化的空間，給自己一段無目的的時間</div></div></div>
+        <div class="timeline-item"><div class="tl-time">16:00</div><div class="tl-body"><div class="tl-place">前往梅田</div><div class="tl-note">地鐵堺筋線北浜→南森町→步行・或地鐵御堂筋線→梅田・約20分・ICOCA 刷卡</div></div></div>
+        <div class="timeline-item"><div class="tl-time">17:30</div><div class="tl-body"><div class="tl-place">梅田晚餐<span class="tl-tag tag-food">食</span></div><div class="tl-note">老舖洋食或居酒屋・提早入座避開黃金週人潮</div></div></div>
+        <div class="timeline-item"><div class="tl-time">19:30</div><div class="tl-body"><div class="tl-place">大丸梅田<span class="tl-tag tag-shop">購</span></div><div class="tl-note">伴手禮集中採購・最後一次大規模購物</div></div></div>
       </div>
     </div>
   </div>
@@ -905,10 +638,7 @@
   <!-- DAY 6 -->
 
   <div class="day-card">
-    <div class="day-number">
-      <div class="day-dot"></div>
-      <div class="day-num-text">DAY 6</div>
-    </div>
+    <div class="day-number"><div class="day-dot"></div><div class="day-num-text">DAY 6</div></div>
     <div class="day-content">
       <div class="day-header">
         <div class="day-date">5 / 6　Wednesday</div>
@@ -916,46 +646,12 @@
         <div class="day-subtitle">最後一站：高島屋難波・然後回家</div>
       </div>
       <div class="timeline">
-        <div class="timeline-item">
-          <div class="tl-time">08:00</div>
-          <div class="tl-body">
-            <div class="tl-place">退房・行李寄存</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">10:00</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">高島屋難波<span class="tl-tag tag-shop">購</span></div>
-            <div class="tl-note">開門衝地下食品街・抹茶伴手禮最終掃貨</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">11:15</div>
-          <div class="tl-body">
-            <div class="tl-place">難波出發</div>
-            <div class="tl-note">空港急行 → 關西空港・約40分</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">12:00</div>
-          <div class="tl-body">
-            <div class="tl-place">關西空港</div>
-            <div class="tl-note">辦理報到・行李托運</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">14:00</div>
-          <div class="tl-body">
-            <div class="tl-place highlight">CI0153 出發</div>
-            <div class="tl-note">中華航空　KIX → TPE</div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-time">16:00</div>
-          <div class="tl-body">
-            <div class="tl-place">桃園機場抵達</div>
-          </div>
-        </div>
+        <div class="timeline-item"><div class="tl-time">08:00</div><div class="tl-body"><div class="tl-place">退房・行李寄存</div></div></div>
+        <div class="timeline-item"><div class="tl-time">10:00</div><div class="tl-body"><div class="tl-place highlight">高島屋難波<span class="tl-tag tag-shop">購</span></div><div class="tl-note">開門衝地下食品街・抹茶伴手禮最終掃貨</div></div></div>
+        <div class="timeline-item"><div class="tl-time">11:15</div><div class="tl-body"><div class="tl-place">難波出發</div><div class="tl-note">南海電鐵難波站・空港急行→關西空港・約40分・ICOCA 刷卡</div></div></div>
+        <div class="timeline-item"><div class="tl-time">12:00</div><div class="tl-body"><div class="tl-place">關西空港</div><div class="tl-note">辦理報到・行李托運</div></div></div>
+        <div class="timeline-item"><div class="tl-time">14:00</div><div class="tl-body"><div class="tl-place highlight">CI0153 出發</div><div class="tl-note">中華航空　KIX → TPE</div></div></div>
+        <div class="timeline-item"><div class="tl-time">16:00</div><div class="tl-body"><div class="tl-place">桃園機場抵達</div></div></div>
       </div>
     </div>
   </div>
